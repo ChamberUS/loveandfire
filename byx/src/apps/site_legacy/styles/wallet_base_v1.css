@@ -1,0 +1,296 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+.wallet-base-scope {
+  --background: 240 15% 6%;
+  --foreground: 0 0% 98%;
+
+  --card: 240 12% 10%;
+  --card-foreground: 0 0% 98%;
+
+  --popover: 240 12% 8%;
+  --popover-foreground: 0 0% 98%;
+
+  --primary: 48 100% 55%;
+  --primary-foreground: 240 15% 6%;
+
+  --secondary: 240 10% 15%;
+  --secondary-foreground: 0 0% 85%;
+
+  --muted: 240 8% 18%;
+  --muted-foreground: 240 5% 55%;
+
+  --accent: 270 80% 60%;
+  --accent-foreground: 0 0% 98%;
+
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 98%;
+
+  --border: 240 10% 18%;
+  --input: 240 10% 15%;
+  --ring: 48 100% 55%;
+
+  --radius: 0.75rem;
+
+  --aios-gold: 48 100% 55%;
+  --aios-gold-glow: 48 100% 65%;
+  --aios-purple: 270 80% 60%;
+  --aios-purple-glow: 270 80% 70%;
+  --aios-dark: 240 15% 6%;
+  --aios-card: 240 12% 10%;
+  --aios-glass: 240 12% 12%;
+  --glass-bg: 240 12% 12% / 0.6;
+  --glass-border: 240 10% 25% / 0.3;
+  --gradient-gold: linear-gradient(135deg, hsl(48 100% 55%), hsl(40 100% 45%));
+  --gradient-purple: linear-gradient(135deg, hsl(270 80% 60%), hsl(290 80% 50%));
+  --gradient-dark: linear-gradient(180deg, hsl(240 15% 8%), hsl(240 15% 4%));
+  --gradient-glow: radial-gradient(ellipse at center, hsl(270 80% 60% / 0.15), transparent 70%);
+
+  font-family: 'Space Grotesk', sans-serif;
+  color: hsl(var(--foreground));
+  background-color: hsl(var(--background));
+}
+
+.wallet-base-scope .font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.wallet-base-scope .glass-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: hsla(var(--glass-bg));
+  border: 1px solid hsla(var(--glass-border));
+  backdrop-filter: blur(20px);
+}
+
+.wallet-base-scope .identity-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  padding: 24px;
+  background: linear-gradient(145deg, hsl(240 12% 14%), hsl(240 12% 8%));
+  border: 1px solid hsla(240 10% 20% / 0.5);
+  box-shadow:
+    0 25px 50px -12px hsla(0 0% 0% / 0.5),
+    0 0 0 1px hsla(240 10% 20% / 0.3),
+    inset 0 1px 0 hsla(240 10% 30% / 0.2);
+}
+
+.wallet-base-scope .identity-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.3;
+  background: radial-gradient(ellipse at 30% 20%, hsl(var(--aios-gold) / 0.1), transparent 50%);
+}
+
+.wallet-base-scope .crypto-matrix {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+}
+
+.wallet-base-scope .scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, hsl(var(--aios-gold)), transparent);
+  animation: scan 3s ease-in-out infinite;
+}
+
+@keyframes scan {
+  0%, 100% { top: 0; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+.wallet-base-scope .particle {
+  position: absolute;
+  border-radius: 999px;
+  background: hsl(var(--aios-gold) / 0.6);
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
+  50% { transform: translateY(-20px) translateX(10px); opacity: 0.8; }
+}
+
+.wallet-base-scope .glow-gold {
+  box-shadow: 0 0 30px hsl(var(--aios-gold) / 0.3);
+}
+
+.wallet-base-scope .glow-purple {
+  box-shadow: 0 0 30px hsl(var(--aios-purple) / 0.3);
+}
+
+.wallet-base-scope .text-glow-gold {
+  text-shadow: 0 0 20px hsl(var(--aios-gold) / 0.5);
+}
+
+.wallet-base-scope .stat-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  padding: 1rem;
+  background: hsla(var(--glass-bg));
+  border: 1px solid hsla(var(--glass-border));
+  backdrop-filter: blur(20px);
+  transition: all 0.3s ease;
+}
+
+.wallet-base-scope .stat-card:hover {
+  transform: translateY(-2px);
+  border-color: hsl(var(--aios-gold) / 0.3);
+}
+
+.wallet-base-scope .transaction-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  padding: 1rem;
+  background: hsla(var(--glass-bg));
+  border: 1px solid hsla(var(--glass-border));
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+}
+
+.wallet-base-scope .transaction-item:hover {
+  background: hsla(240 12% 14% / 0.8);
+  border-color: hsl(var(--aios-gold) / 0.2);
+}
+
+.wallet-base-scope .matrix-char {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  animation: matrixFade 2s ease-in-out infinite;
+}
+
+@keyframes matrixFade {
+  0%, 100% { opacity: 0.1; color: hsl(var(--muted-foreground)); }
+  50% { opacity: 0.6; color: hsl(var(--aios-gold)); }
+}
+
+.wallet-base-scope .pulse-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  border: 1px solid hsl(var(--aios-gold) / 0.3);
+  animation: pulseRing 2s ease-out infinite;
+}
+
+@keyframes pulseRing {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+}
+
+.wallet-base-scope .shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.wallet-base-scope .shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, hsl(var(--aios-gold) / 0.1), transparent);
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.wallet-base-scope .donut-chart { position: relative; }
+
+.wallet-base-scope .privacy-toggle {
+  padding: 8px;
+  border-radius: 12px;
+  background: hsla(240 12% 15% / 0.5);
+  border: 1px solid hsl(var(--border));
+  transition: all 0.3s ease;
+}
+
+.wallet-base-scope .privacy-toggle:hover {
+  background: hsl(240 12% 18%);
+  border-color: hsl(var(--aios-gold) / 0.3);
+}
+
+.wallet-base-scope .privacy-toggle.active {
+  background: hsl(var(--aios-gold) / 0.1);
+  border-color: hsl(var(--aios-gold) / 0.5);
+}
+
+.wallet-base-scope .animate-fade-in {
+  opacity: 0;
+  animation: fade-in 0.8s ease-out forwards;
+}
+
+.wallet-base-scope .animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.wallet-base-scope .animate-glow-pulse {
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.wallet-base-scope .animation-delay-100 { animation-delay: 0.1s; }
+.wallet-base-scope .animation-delay-200 { animation-delay: 0.2s; }
+.wallet-base-scope .animation-delay-300 { animation-delay: 0.3s; }
+.wallet-base-scope .animation-delay-500 { animation-delay: 0.5s; }
+.wallet-base-scope .animation-delay-700 { animation-delay: 0.7s; }
+
+.wallet-base-scope ::-webkit-scrollbar {
+  width: 6px;
+}
+
+.wallet-base-scope ::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+.wallet-base-scope ::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted));
+  border-radius: 3px;
+}
+
+.wallet-base-scope ::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+}
+
+.wallet-base-scope .scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.wallet-base-scope .scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.wallet-base-scope .trust-bubble {
+  transform: translateY(-12px);
+}
+
+@keyframes bubble-drop {
+  0% { opacity: 0; transform: translateY(-16px); }
+  50% { opacity: 1; }
+  100% { opacity: 1; transform: translateY(0); }
+}

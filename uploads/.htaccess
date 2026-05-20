@@ -1,0 +1,5 @@
+# Protecao basica para hospedagem Apache antiga
+Options -Indexes
+<FilesMatch "\.php$">
+    Deny from all
+</FilesMatch>

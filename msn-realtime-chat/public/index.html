@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <!-- CORRECAO MOBILE: viewport evita zoom por duplo toque e mantem a UI ajustada no envio pelo teclado virtual. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+    <title>MSN Realtime Chat</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div class="join-screen" id="joinScreen">
+      <form class="join-card" id="joinForm">
+        <span class="msn-badge">MSN</span>
+        <h1>Entrar na sala</h1>
+
+        <label for="joinNickname">Nickname</label>
+        <input id="joinNickname" name="nickname" type="text" maxlength="24" autocomplete="nickname" placeholder="Seu nome">
+
+        <label for="joinAvatar">Foto de perfil</label>
+        <div class="avatar-picker">
+          <img id="joinAvatarPreview" class="avatar-preview" alt="Preview da foto de perfil">
+          <input id="joinAvatar" name="avatar" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
+        </div>
+
+        <label for="joinColor">Cor da fonte</label>
+        <div class="color-row">
+          <input id="joinColor" name="color" type="color" value="#0b72d9" aria-label="Cor da fonte">
+          <div class="swatches" aria-label="Cores rapidas">
+            <button type="button" class="swatch" data-color="#0b72d9" style="--swatch:#0b72d9"></button>
+            <button type="button" class="swatch" data-color="#119c59" style="--swatch:#119c59"></button>
+            <button type="button" class="swatch" data-color="#c65300" style="--swatch:#c65300"></button>
+            <button type="button" class="swatch" data-color="#a020f0" style="--swatch:#a020f0"></button>
+          </div>
+        </div>
+
+        <button class="primary-button" type="submit">Conectar</button>
+      </form>
+    </div>
+
+    <div class="app-shell" id="appShell" hidden>
+      <div class="mobile-scrim" id="mobileScrim"></div>
+
+      <aside class="sidebar" id="sidebar" aria-label="Painel lateral">
+        <div class="brand">
+          <span class="msn-badge">MSN</span>
+          <div>
+            <strong>Sala online</strong>
+            <span id="onlineCount">0 usuarios</span>
+          </div>
+        </div>
+
+        <form class="profile-panel" id="profileForm">
+          <label for="profileNickname">Nickname</label>
+          <input id="profileNickname" type="text" maxlength="24" autocomplete="nickname">
+
+          <label for="profileAvatar">Foto de perfil</label>
+          <div class="avatar-picker compact">
+            <img id="profileAvatarPreview" class="avatar-preview" alt="Preview da foto de perfil">
+            <input id="profileAvatar" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
+          </div>
+          <button class="secondary-button" id="removeProfilePhoto" type="button">Remover foto</button>
+
+          <label for="profileColor">Cor da fonte</label>
+          <input id="profileColor" type="color" value="#0b72d9" aria-label="Cor da fonte">
+
+          <button type="submit">Atualizar perfil</button>
+        </form>
+
+        <div class="online-heading">
+          <strong>Online agora</strong>
+        </div>
+        <ul class="user-list" id="userList"></ul>
+      </aside>
+
+      <main class="chat-panel">
+        <header class="topbar">
+          <button class="icon-button menu-button" type="button" id="sidebarToggle" aria-label="Abrir usuarios online">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <div class="room-title">
+            <span class="presence-dot"></span>
+            <div>
+              <strong>Chat em tempo real</strong>
+              <small id="connectionStatus">Conectando...</small>
+            </div>
+          </div>
+
+          <button class="ghost-button" type="button" id="clearMessages">Limpar tela</button>
+        </header>
+
+        <section class="messages" id="messages" aria-live="polite" aria-label="Mensagens"></section>
+
+        <div class="typing-line" id="typingLine" aria-live="polite"></div>
+
+        <!-- CORRECAO MOBILE: input e botao ficam obrigatoriamente dentro do form para touch, Enter e "Ir" funcionarem. -->
+        <form class="composer" id="messageForm" autocomplete="off">
+          <div class="format-bar">
+            <label class="inline-color" for="messageColor">
+              Fonte
+              <input id="messageColor" type="color" value="#0b72d9" aria-label="Cor da mensagem">
+            </label>
+            <div class="edit-state" id="editState" hidden>
+              <span>Editando mensagem</span>
+              <button type="button" id="cancelEdit">Cancelar</button>
+            </div>
+            <span class="format-preview" id="formatPreview">Aa</span>
+          </div>
+
+          <div class="input-row">
+            <input id="messageInput" type="text" maxlength="500" enterkeyhint="send" placeholder="Digite sua mensagem" required>
+            <button class="send-button" type="submit">Enviar</button>
+          </div>
+        </form>
+      </main>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/client.js"></script>
+  </body>
+</html>

@@ -1,0 +1,194 @@
+.iaos-marketplace {
+  --mp-bg: #070b0f;
+  --mp-surface: rgba(255, 255, 255, 0.06);
+  --mp-card: rgba(255, 255, 255, 0.06);
+  --mp-border: rgba(255, 255, 255, 0.1);
+  --mp-text: rgba(255, 255, 255, 0.92);
+  --mp-muted: rgba(255, 255, 255, 0.65);
+  --mp-accent: #38bdf8;
+  --mp-primary: #10b981;
+  --mp-glass: blur(16px);
+  color: var(--mp-text);
+  background-color: var(--mp-bg);
+}
+
+.iaos-marketplace .marketplace-shell {
+  background: radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.04), transparent 35%),
+    radial-gradient(circle at 80% 10%, rgba(244, 191, 61, 0.06), transparent 40%),
+    radial-gradient(circle at 60% 70%, rgba(124, 58, 237, 0.05), transparent 45%),
+    var(--mp-bg);
+}
+
+.iaos-marketplace .marketplace-shell__overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 70px 70px;
+  mix-blend-mode: screen;
+  z-index: 1;
+}
+
+.iaos-marketplace .marketplace-shell__glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 30%, rgba(82, 222, 151, 0.08), transparent 45%),
+    radial-gradient(circle at 20% 60%, rgba(80, 181, 255, 0.06), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(244, 191, 61, 0.08), transparent 45%);
+  filter: blur(10px);
+  z-index: 2;
+}
+
+.iaos-marketplace .glass-surface,
+.iaos-marketplace .mp-glass-surface,
+.iaos-marketplace .mp-glass-card {
+  background: var(--mp-card);
+  border: 1px solid var(--mp-border);
+  backdrop-filter: var(--mp-glass);
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.35),
+    0 1px 0 rgba(255, 255, 255, 0.05) inset;
+}
+
+.iaos-marketplace .mp-glass-card {
+  border-radius: 0.75rem;
+}
+
+.iaos-marketplace .glass-button {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.9), rgba(52, 211, 153, 0.9));
+  color: #0a0a0a;
+  box-shadow: 0 8px 30px rgba(16, 185, 129, 0.35);
+}
+
+.iaos-marketplace .glass-outline {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.iaos-marketplace .glass-card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.iaos-marketplace .glass-card-hover:hover {
+  transform: translateY(-3px);
+  border-color: rgba(244, 191, 61, 0.25);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+}
+
+.iaos-marketplace .pill-badge {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+}
+
+.iaos-marketplace .mp-text-primary {
+  color: var(--mp-text);
+}
+
+.iaos-marketplace .mp-text-muted {
+  color: var(--mp-muted);
+}
+
+.iaos-marketplace .mp-border {
+  border-color: var(--mp-border);
+}
+
+.iaos-marketplace .mp-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.iaos-marketplace .mp-line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.iaos-marketplace .mp-line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.iaos-marketplace .mp-break-words {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.iaos-marketplace input,
+.iaos-marketplace textarea,
+.iaos-marketplace select {
+  background-color: rgba(0, 0, 0, 0.35);
+  color: var(--mp-text);
+  border-color: var(--mp-border);
+}
+
+.iaos-marketplace input::placeholder,
+.iaos-marketplace textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.iaos-marketplace .mp-input {
+  background-color: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--mp-border);
+  color: var(--mp-text);
+}
+
+.iaos-marketplace .mp-btn {
+  border-radius: 0.75rem;
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+}
+
+.iaos-marketplace .mp-chip {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--mp-border);
+  color: var(--mp-text);
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+}
+
+.iaos-marketplace .mp-shadow {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.iaos-marketplace .bg-white {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+.iaos-marketplace .text-gray-900 {
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+.iaos-marketplace .border-gray-200 {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.iaos-marketplace .product-card.list-mode {
+  display: flex;
+  gap: 14px;
+  align-items: stretch;
+  max-height: 160px;
+  min-height: 132px;
+}
+
+.iaos-marketplace .product-card.list-mode .product-media {
+  width: 28%;
+  min-width: 120px;
+  max-width: 160px;
+}
+
+.iaos-marketplace .product-card .product-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.iaos-marketplace .product-card .product-cta {
+  width: 100%;
+}

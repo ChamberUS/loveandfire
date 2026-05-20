@@ -1,0 +1,127 @@
+.wallet-hero-scope {
+  position: relative;
+  overflow: hidden;
+  padding: 5rem 1.5rem 6rem;
+  min-height: calc(100vh - 64px);
+}
+
+.wallet-hero-scope .hero-glow {
+  position: absolute;
+  inset: -30%;
+  background: radial-gradient(circle at 50% 40%, rgba(245, 194, 73, 0.22), transparent 45%),
+    radial-gradient(circle at 30% 70%, rgba(123, 92, 255, 0.18), transparent 40%),
+    radial-gradient(circle at 70% 80%, rgba(56, 239, 125, 0.18), transparent 40%);
+  filter: blur(60px);
+  opacity: 0.8;
+}
+
+.wallet-hero-scope .hero-center {
+  position: relative;
+  text-align: center;
+  padding: 2rem 1.5rem 4rem;
+  max-width: 960px;
+  margin: 0 auto;
+  z-index: 2;
+}
+
+.wallet-hero-scope .hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04) 1px, transparent 1px, transparent 28px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04) 1px, transparent 1px, transparent 28px);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.wallet-hero-scope .hero-logo {
+  width: 120px;
+  height: 120px;
+  border-radius: 60px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, rgba(245, 194, 73, 0.5), rgba(0, 0, 0, 0.5));
+  border: 1px solid rgba(245, 194, 73, 0.55);
+  box-shadow: 0 0 40px rgba(245, 194, 73, 0.35);
+  animation: hero-pulse 6s ease-in-out infinite;
+  position: relative;
+}
+
+.wallet-hero-scope .hero-logo img {
+  width: 86px;
+  height: 86px;
+  object-fit: contain;
+}
+
+.wallet-hero-scope .hero-ring {
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  border: 1px solid rgba(245, 194, 73, 0.25);
+  box-shadow: 0 0 50px rgba(245, 194, 73, 0.25);
+  animation: hero-rotate 9s linear infinite;
+}
+
+.wallet-hero-scope .float-card {
+  position: absolute;
+  min-width: 210px;
+  padding: 1rem 1.1rem;
+  border-radius: 14px;
+  background: rgba(12, 16, 26, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px);
+  color: #f5f7fb;
+  animation: hero-float 8s ease-in-out infinite;
+}
+
+.wallet-hero-scope .float-card p.description {
+  color: #8f9bb3;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.wallet-hero-scope .float-card:nth-child(odd) {
+  animation-delay: 0.8s;
+}
+
+.wallet-hero-scope .float-card .icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: rgba(245, 194, 73, 0.12);
+  border: 1px solid rgba(245, 194, 73, 0.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #f5c249;
+  margin-bottom: 0.35rem;
+}
+
+@keyframes hero-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
+@keyframes hero-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes hero-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.wallet-hero-scope .hero-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #d7e0f0;
+  font-size: 13px;
+}
