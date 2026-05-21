@@ -384,6 +384,7 @@ function render_header($title, $active)
         nav_link('feed.php', 'Curtidas', $active === 'feed', '&#9825;');
         nav_link('swipe.php', 'Matches', $active === 'swipe', '&#10084;');
         nav_link('chat.php', 'Mensagens', $active === 'chat', '&#128172;');
+        nav_link('byx_wallet.php', 'Carteira BYX', $active === 'byx_wallet', '&#128179;');
         nav_link('profile_edit.php', 'Perfil', $active === 'profile', '&#9786;');
         echo '</nav>';
     }
