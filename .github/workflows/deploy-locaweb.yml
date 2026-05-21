@@ -1,0 +1,25 @@
+name: Deploy LovenFire via FTP Locaweb
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Publicar arquivos PHP na Locaweb
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar código do GitHub
+        uses: actions/checkout@v4
+
+      - name: Enviar arquivos para Locaweb via FTP
+        uses: locaweb/ftp-deploy@1.0.0
+        with:
+          host: ${{ secrets.HOST }}
+          user: ${{ secrets.USER }}
+          password: ${{ secrets.PASS }}
+          localDir: "."
+          remoteDir: "/"
