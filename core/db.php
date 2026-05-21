@@ -9,18 +9,17 @@ function db_connect()
         return $GLOBALS['HC_DB_LINK'];
     }
 
-    $link = @mysql_connect(DB_HOST, DB_USER, DB_PASS);
+    $link = @mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
     if (!$link) {
         die('Erro ao conectar no banco de dados. Verifique config/config.php');
     }
 
-    if (!@mysql_select_db(DB_NAME, $link)) {
-        die('Banco de dados nao encontrado: ' . h(DB_NAME));
+    if (!@mysqli_set_charset($link, 'utf8mb4')) {
+        @mysqli_set_charset($link, 'utf8');
     }
 
-    @mysql_query("SET NAMES 'utf8'", $link);
-    @mysql_query("SET CHARACTER SET utf8", $link);
-    @mysql_query("SET COLLATION_CONNECTION = 'utf8_unicode_ci'", $link);
+    @mysqli_query($link, "SET NAMES utf8mb4");
+    @mysqli_query($link, "SET collation_connection = 'utf8mb4_unicode_ci'");
 
     $GLOBALS['HC_DB_LINK'] = $link;
     return $link;
@@ -32,15 +31,15 @@ function db_escape($value)
     if ($value === null) {
         return 'NULL';
     }
-    return "'" . mysql_real_escape_string($value) . "'";
+    return "'" . mysqli_real_escape_string(db_connect(), (string)$value) . "'";
 }
 
 function db_query($sql)
 {
     $link = db_connect();
-    $result = mysql_query($sql, $link);
+    $result = mysqli_query($link, $sql);
     if (!$result && APP_DEBUG) {
-        die('<pre>Erro SQL: ' . h(mysql_error($link)) . "\n\n" . h($sql) . '</pre>');
+        die('<pre>Erro SQL: ' . h(mysqli_error($link)) . "\n\n" . h($sql) . '</pre>');
     }
     return $result;
 }
@@ -48,7 +47,7 @@ function db_query($sql)
 function db_fetch_assoc($result)
 {
     if (!$result) { return false; }
-    return mysql_fetch_assoc($result);
+    return mysqli_fetch_assoc($result);
 }
 
 function db_fetch_one($sql)
@@ -72,11 +71,16 @@ function db_fetch_all($sql)
 
 function db_insert_id()
 {
-    return mysql_insert_id(db_connect());
+    return mysqli_insert_id(db_connect());
 }
 
 function db_num_rows($result)
 {
     if (!$result) { return 0; }
-    return mysql_num_rows($result);
+    return mysqli_num_rows($result);
+}
+
+function db_error()
+{
+    return mysqli_error(db_connect());
 }

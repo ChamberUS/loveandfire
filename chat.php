@@ -199,16 +199,6 @@ function lf_renew_json($data) {
 function lf_renew_query_direct($sql) {
     $GLOBALS['LF_RENEW_LAST_SQL_ERROR'] = '';
 
-    if (function_exists('mysql_query')) {
-        $res = @mysql_query($sql);
-
-        if (!$res && function_exists('mysql_error')) {
-            $GLOBALS['LF_RENEW_LAST_SQL_ERROR'] = mysql_error();
-        }
-
-        return $res;
-    }
-
     if (function_exists('db_query')) {
         $res = @db_query($sql);
 
@@ -224,26 +214,6 @@ function lf_renew_query_direct($sql) {
 }
 
 function lf_renew_fetch_all_direct($sql) {
-    $rows = array();
-
-    if (function_exists('mysql_query') && function_exists('mysql_fetch_assoc')) {
-        $res = @mysql_query($sql);
-
-        if (!$res) {
-            if (function_exists('mysql_error')) {
-                $GLOBALS['LF_RENEW_LAST_SQL_ERROR'] = mysql_error();
-            }
-
-            return array();
-        }
-
-        while ($row = mysql_fetch_assoc($res)) {
-            $rows[] = $row;
-        }
-
-        return $rows;
-    }
-
     if (function_exists('db_fetch_all')) {
         $r = @db_fetch_all($sql);
         return $r ? $r : array();
@@ -253,21 +223,6 @@ function lf_renew_fetch_all_direct($sql) {
 }
 
 function lf_renew_fetch_one_direct($sql) {
-    if (function_exists('mysql_query') && function_exists('mysql_fetch_assoc')) {
-        $res = @mysql_query($sql);
-
-        if (!$res) {
-            if (function_exists('mysql_error')) {
-                $GLOBALS['LF_RENEW_LAST_SQL_ERROR'] = mysql_error();
-            }
-
-            return false;
-        }
-
-        $row = mysql_fetch_assoc($res);
-        return $row ? $row : false;
-    }
-
     if (function_exists('db_fetch_one')) {
         return @db_fetch_one($sql);
     }
@@ -277,10 +232,6 @@ function lf_renew_fetch_one_direct($sql) {
 
 function lf_renew_escape($value) {
     $value = lf_renew_utf8_string($value);
-
-    if (function_exists('mysql_real_escape_string')) {
-        return mysql_real_escape_string($value);
-    }
 
     if (function_exists('db_escape')) {
         return db_escape($value);

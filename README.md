@@ -1,8 +1,8 @@
-# Love & Fire PHP 5.3
+# Love & Fire PHP 8+
 
 MVP inicial de app de relacionamentos hibrido com identidade Love & Fire: **Descoberta + Curtidas + Matches + Chat humano**.
 
-Este pacote foi preparado para rodar em hospedagem antiga com **PHP 5.3** e MySQL usando `mysql_*`, sem Composer, sem Laravel e sem Node.js.
+Este pacote roda com **PHP 8+** e MySQL usando `mysqli`, sem Composer, sem Laravel e sem Node.js.
 
 ## Modulos incluidos
 
@@ -20,17 +20,13 @@ Este pacote foi preparado para rodar em hospedagem antiga com **PHP 5.3** e MySQ
 - Estrutura de selo humano verificado
 - Design visual moderno inspirado em app social/mobile
 
-## Limitacoes importantes do PHP 5.3
+## Requisitos
 
-O PHP 5.3 nao e recomendado para producao com dados sensiveis. Este MVP atende ao requisito de compatibilidade, mas para uso real com usuarios finais o ideal e migrar para PHP 8.x.
-
-Principais limitacoes desta versao:
-
-- Nao usa WebSocket nativo; o chat funciona por AJAX polling a cada 2,5 segundos.
-- Nao usa `password_hash`, pois so existe a partir do PHP 5.5.
-- Usa `mysql_*`, compativel com PHP 5.3, mas obsoleto em versoes novas.
-- Upload de fotos ainda esta preparado como estrutura, mas nao foi ativado no MVP.
-- Verificacao humana esta modelada no banco, mas a revisao ainda e manual/futura.
+- PHP 8.0 ou superior (recomendado: PHP 8.3+)
+- Extensao `mysqli`
+- Extensao `mbstring` (recomendada)
+- MySQL 5.7+ ou MariaDB equivalente
+- HTTPS em producao
 
 ## Instalacao
 

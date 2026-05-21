@@ -30,7 +30,11 @@ function flash_get($key)
 function csrf_token()
 {
     if (empty($_SESSION['csrf_token'])) {
-        $_SESSION['csrf_token'] = sha1(uniqid(mt_rand(), true));
+        if (function_exists('random_bytes')) {
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        } else {
+            $_SESSION['csrf_token'] = sha1(uniqid((string)mt_rand(), true));
+        }
     }
     return $_SESSION['csrf_token'];
 }
@@ -42,8 +46,15 @@ function csrf_field()
 
 function csrf_check()
 {
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        die('Metodo invalido para esta operacao.');
+    }
     $posted = isset($_POST['csrf_token']) ? $_POST['csrf_token'] : '';
-    if (!$posted || empty($_SESSION['csrf_token']) || $posted !== $_SESSION['csrf_token']) {
+    if (
+        !$posted ||
+        empty($_SESSION['csrf_token']) ||
+        !hash_equals($_SESSION['csrf_token'], $posted)
+    ) {
         die('Token de seguranca invalido. Recarregue a pagina.');
     }
 }
@@ -170,6 +181,9 @@ function today_sql()
 function json_response($data)
 {
     header('Content-Type: application/json; charset=utf-8');
+    header('X-Content-Type-Options: nosniff');
+    header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+    header('Pragma: no-cache');
     echo json_encode($data);
     exit;
 }

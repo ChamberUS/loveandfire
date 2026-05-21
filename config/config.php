@@ -1,6 +1,6 @@
 <?php
 /*
- * Love & Fire PHP 5.3 - Configuracao principal
+ * Love & Fire PHP 8+ - Configuracao principal
  */
 
 if (!defined('HC_APP')) {
@@ -20,10 +20,9 @@ define('PUBLIC_UPLOAD_PATH', 'uploads');
 
 define('FREE_DM_DAILY_LIMIT', 5);
 define('SESSION_NAME', 'LOVENFIRESESSID');
-define('APP_DEBUG', true);
+define('APP_DEBUG', false);
 
 /*
- * Modo legado:
- * Projeto em PHP 5.3 usando mysql_*.
+ * Projeto atualizado para PHP 8+ com mysqli.
  */
 ?>
