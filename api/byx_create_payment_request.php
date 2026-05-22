@@ -35,6 +35,20 @@ $memo = isset($jsonBody['memo']) ? (string)$jsonBody['memo'] : (isset($_POST['me
 $expires = isset($jsonBody['expires_in_seconds']) ? intval($jsonBody['expires_in_seconds']) : (isset($_POST['expires_in_seconds']) ? intval($_POST['expires_in_seconds']) : 900);
 
 $result = byx_create_payment_request($lojaId, $amount, $memo, $expires);
+
+if ($result['ok'] && isset($result['data']) && is_array($result['data'])) {
+    $paymentRequestId = 0;
+    if (isset($result['data']['request_id']) && is_numeric($result['data']['request_id']) && intval($result['data']['request_id']) > 0) {
+        $paymentRequestId = intval($result['data']['request_id']);
+    } elseif (isset($result['data']['id']) && is_numeric($result['data']['id']) && intval($result['data']['id']) > 0) {
+        $paymentRequestId = intval($result['data']['id']);
+    }
+
+    if ($paymentRequestId > 0) {
+        $result['data']['payment_request_id'] = $paymentRequestId;
+    }
+}
+
 $status = $result['ok'] ? 200 : ($result['status'] > 0 ? intval($result['status']) : 400);
 http_response_code($status);
 json_response($result);
