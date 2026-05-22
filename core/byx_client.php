@@ -226,3 +226,84 @@ function byx_pay_payment_request_devnet($requestId)
     }
     return byx_request('POST', '/v1/devnet/payment-requests/' . $requestId . '/pay', array());
 }
+
+function byx_is_positive_int_value($value)
+{
+    if (is_int($value)) {
+        return $value > 0;
+    }
+    if (is_string($value)) {
+        return (bool)preg_match('/^[1-9][0-9]*$/', trim($value));
+    }
+    return false;
+}
+
+function byx_extract_numeric_payment_request_id_from_data($data)
+{
+    if (!is_array($data)) {
+        return 0;
+    }
+
+    $candidates = array();
+    if (isset($data['payment_request_id'])) { $candidates[] = $data['payment_request_id']; }
+    if (isset($data['id'])) { $candidates[] = $data['id']; }
+    if (isset($data['request_id']) && byx_is_positive_int_value($data['request_id'])) { $candidates[] = $data['request_id']; }
+
+    if (isset($data['payment_request']) && is_array($data['payment_request'])) {
+        if (isset($data['payment_request']['payment_request_id'])) { $candidates[] = $data['payment_request']['payment_request_id']; }
+        if (isset($data['payment_request']['id'])) { $candidates[] = $data['payment_request']['id']; }
+        if (isset($data['payment_request']['request_id']) && byx_is_positive_int_value($data['payment_request']['request_id'])) {
+            $candidates[] = $data['payment_request']['request_id'];
+        }
+    }
+
+    foreach ($candidates as $candidate) {
+        if (byx_is_positive_int_value($candidate)) {
+            return intval($candidate);
+        }
+    }
+
+    return 0;
+}
+
+function byx_extract_payment_request_status_from_data($data)
+{
+    if (!is_array($data)) {
+        return '';
+    }
+    if (isset($data['status']) && is_string($data['status'])) {
+        return trim($data['status']);
+    }
+    if (isset($data['payment_status']) && is_string($data['payment_status'])) {
+        return trim($data['payment_status']);
+    }
+    if (isset($data['payment_request']) && is_array($data['payment_request'])) {
+        if (isset($data['payment_request']['status']) && is_string($data['payment_request']['status'])) {
+            return trim($data['payment_request']['status']);
+        }
+        if (isset($data['payment_request']['payment_status']) && is_string($data['payment_request']['payment_status'])) {
+            return trim($data['payment_request']['payment_status']);
+        }
+    }
+    return '';
+}
+
+function byx_extract_payment_request_amount_microbyx_from_data($data)
+{
+    if (!is_array($data)) {
+        return 0;
+    }
+    $candidates = array();
+    if (isset($data['amount_microbyx'])) { $candidates[] = $data['amount_microbyx']; }
+    if (isset($data['amount'])) { $candidates[] = $data['amount']; }
+    if (isset($data['payment_request']) && is_array($data['payment_request'])) {
+        if (isset($data['payment_request']['amount_microbyx'])) { $candidates[] = $data['payment_request']['amount_microbyx']; }
+        if (isset($data['payment_request']['amount'])) { $candidates[] = $data['payment_request']['amount']; }
+    }
+    foreach ($candidates as $candidate) {
+        if (is_numeric($candidate) && intval($candidate) > 0) {
+            return intval($candidate);
+        }
+    }
+    return 0;
+}

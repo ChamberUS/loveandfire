@@ -36,16 +36,15 @@ $expires = isset($jsonBody['expires_in_seconds']) ? intval($jsonBody['expires_in
 
 $result = byx_create_payment_request($lojaId, $amount, $memo, $expires);
 
-if ($result['ok'] && isset($result['data']) && is_array($result['data'])) {
-    $paymentRequestId = 0;
-    if (isset($result['data']['request_id']) && is_numeric($result['data']['request_id']) && intval($result['data']['request_id']) > 0) {
-        $paymentRequestId = intval($result['data']['request_id']);
-    } elseif (isset($result['data']['id']) && is_numeric($result['data']['id']) && intval($result['data']['id']) > 0) {
-        $paymentRequestId = intval($result['data']['id']);
-    }
-
+if ($result['ok']) {
+    $data = (isset($result['data']) && is_array($result['data'])) ? $result['data'] : array();
+    $paymentRequestId = byx_extract_numeric_payment_request_id_from_data($data);
     if ($paymentRequestId > 0) {
         $result['data']['payment_request_id'] = $paymentRequestId;
+    } else {
+        $result['ok'] = false;
+        $result['status'] = 502;
+        $result['error'] = 'Cobranca criada na blockchain, mas a API nao retornou ID numerico valido. Verifique logs BYX.';
     }
 }
 
